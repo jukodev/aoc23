@@ -19,6 +19,7 @@ public class Day1 {
 
     private void puzzle2(String[] input){
         int sum = 0;
+        String[] nums = {"one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
         for (String str : input) {
             char first = 'n', last = 'n';
             for(int i = 0; i < str.length(); i++){
@@ -27,6 +28,18 @@ public class Day1 {
                         first = str.charAt(i);
                     }
                     last = str.charAt(i);
+                }else{
+                    for (int j = 0; j < 9; j++) {
+                        String sub = str.substring(i);
+                        if (sub.length() >= nums[j].length() && sub.startsWith(nums[j])){
+                            if(first == 'n'){
+                                first = (char) ('0' + (char)(j+1));
+                            }
+                            last = (char) ('0' + (char)(j+1));
+                            break;
+
+                        }
+                    }
                 }
             }
             sum += Integer.parseInt(first + "" + last);
@@ -37,6 +50,6 @@ public class Day1 {
 
     public static void main(String[] args) {
         Day1 day1 = new Day1();
-        day1.puzzle1(InputReader.getLines(1));
+        day1.puzzle2(InputReader.getLines(1));
     }
 }
